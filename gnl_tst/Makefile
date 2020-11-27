@@ -1,8 +1,8 @@
-SRC		= ~/wrk/2gnl/gnl/get_next_line.c
-MAIN	= main.c
+DIR		= ../get_next_line
+SRC		= $(DIR)/get_next_line.c
 OBJ		= $(SRC:.c=.o)
-CC		= cc
-CFLAGS	= -g -Wall -Wextra -Werror -D BUFFER_SIZE=9
+MAIN	= main.c
+CFLAGS	= -g -Wall -Wextra -Werror -D BUFFER_SIZE=9 -I$(DIR)
 NAME	= aa
 
 $(NAME)	: $(OBJ) $(MAIN) Makefile

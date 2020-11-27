@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <fcntl.h>
 #include <unistd.h>
-#include "gnl/get_next_line.h"
+#include "get_next_line.h"
 
 void test_gnl(int fd) {
 //	printf("fd = %d\n", fd);
