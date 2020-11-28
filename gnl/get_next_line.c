@@ -23,8 +23,16 @@ int get_next_line(int fd, char **line)
 	size_t	j;
 	//char	*p;
 
-	if (fd < 0)
+//	*line = NULL;
+
+
+	if (fd < 0 || BUFFER_SIZE <= 0 || !line || read(fd, NULL, 0) == -1)
+	{
+		b.p = b.dat;
+		b.n = 0;
+	//	*line = NULL;
 		return (-1);
+	}
 	if (f != fd)
 	{
 		b.p = b.dat;
@@ -75,5 +83,12 @@ int get_next_line(int fd, char **line)
 	}
 	if (b.n == 0)
 		*line = s.p;
+	if (b.n < 0)
+	{
+		b.p = b.dat;
+		b.n = 0;
+		free(*line);
+		*line = NULL;
+	}
     return (b.n);
 }
