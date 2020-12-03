@@ -1,0 +1,8 @@
+_Store
+.bak
+aa
+*.o
+*.a
+*.so
+.idea
+cmake-build-debug
