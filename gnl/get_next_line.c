@@ -6,7 +6,7 @@
 /*   By: CWatcher <cwatcher@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/03 23:46:20 by CWatcher          #+#    #+#             */
-/*   Updated: 2020/12/04 01:18:33 by CWatcher         ###   ########.fr       */
+/*   Updated: 2020/12/04 13:13:37 by CWatcher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	get_next_line(int fd, char **ln)
 	size_t			j;
 
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || !ln || read(fd, NULL, 0) == -1)
+	if (fd < 0 || !ln || read(fd, NULL, 0) == -1)
 	{
 		b.p = b.dat;
 		b.n = 0;
