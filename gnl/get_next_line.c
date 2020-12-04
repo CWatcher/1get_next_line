@@ -6,7 +6,7 @@
 /*   By: CWatcher <cwatcher@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/03 23:46:20 by CWatcher          #+#    #+#             */
-/*   Updated: 2020/12/04 20:18:22 by CWatcher         ###   ########.fr       */
+/*   Updated: 2020/12/04 20:28:21 by CWatcher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int	get_next_line(int fd, char **ln)
 	static t_str	s;
 	ssize_t			i;
 	size_t			j;
-
 
 	if (fd < 0 || !ln)
 	{
@@ -43,7 +42,7 @@ int	get_next_line(int fd, char **ln)
 	while (0 < b.n || 0 < (b.n = read(f, b.dat, BUFFER_SIZE)))
 	{
 		i = 0;
-		while(i < b.n && b.p[i] != '\n')
+		while (i < b.n && b.p[i] != '\n')
 			i++;
 		if (!(*ln = malloc(s.n + i + 1)))
 		{
@@ -63,7 +62,7 @@ int	get_next_line(int fd, char **ln)
 			s.p[s.n + j] = *(b.p++);
 		s.n += i;
 		s.p[s.n] = '\0';
-		if (i <  b.n)
+		if (i < b.n)
 		{
 			if ((b.n -= i + 1))
 				b.p++;
@@ -79,5 +78,5 @@ int	get_next_line(int fd, char **ln)
 	}
 	if (b.n == 0)
 		*ln = s.p;
-    return (b.n);
+	return (b.n);
 }
