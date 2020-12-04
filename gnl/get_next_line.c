@@ -22,13 +22,11 @@ int	get_next_line(int fd, char **ln)
 	ssize_t			i;
 	size_t			j;
 
-//	*ln = NULL;
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || !ln || read(fd, NULL, 0) == -1)
 	{
 		b.p = b.dat;
 		b.n = 0;
-	//	*ln = NULL;
 		return (-1);
 	}
 	if (f != fd)
@@ -85,8 +83,6 @@ int	get_next_line(int fd, char **ln)
 	{
 		b.p = b.dat;
 		b.n = 0;
-		free(*ln);
-		*ln = NULL;
 	}
     return (b.n);
 }
