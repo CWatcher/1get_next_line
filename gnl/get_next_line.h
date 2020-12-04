@@ -6,12 +6,15 @@
 /*   By: CWatcher <cwatcher@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 01:19:41 by CWatcher          #+#    #+#             */
-/*   Updated: 2020/12/04 01:20:27 by CWatcher         ###   ########.fr       */
+/*   Updated: 2020/12/04 09:12:50 by CWatcher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
+
+# include <stddef.h>
+# include <sys/types.h>
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 1
