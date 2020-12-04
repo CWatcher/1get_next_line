@@ -1,36 +1,34 @@
-#include "stdlib.h"
-#include "unistd.h"
-#ifndef BUFFER_SIZE
-# define BUFFER_SIZE 1
-#endif
-typedef struct
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: CWatcher <cwatcher@student.21-school.ru>   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/12/03 23:46:20 by CWatcher          #+#    #+#             */
+/*   Updated: 2020/12/04 01:18:33 by CWatcher         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <stdlib.h>
+#include <unistd.h>
+#include "get_next_line.h"
+
+int	get_next_line(int fd, char **ln)
 {
-	char	dat[BUFFER_SIZE];
-	char	*p;
-	ssize_t	n;
-} t_buffer;
-typedef struct {
-	char*	p;
-	size_t	n;
-} t_str;
+	static int		f = -2;
+	static t_buffer b;
+	static t_str	s;
+	ssize_t			i;
+	size_t			j;
 
-int get_next_line(int fd, char **line)
-{
-	static	int f = -2;
-    static	t_buffer b;
-	static	t_str	s;
-	ssize_t	i;
-	size_t	j;
-	//char	*p;
+//	*ln = NULL;
 
-//	*line = NULL;
-
-
-	if (fd < 0 || BUFFER_SIZE <= 0 || !line || read(fd, NULL, 0) == -1)
+	if (fd < 0 || BUFFER_SIZE <= 0 || !ln || read(fd, NULL, 0) == -1)
 	{
 		b.p = b.dat;
 		b.n = 0;
-	//	*line = NULL;
+	//	*ln = NULL;
 		return (-1);
 	}
 	if (f != fd)
@@ -43,13 +41,13 @@ int get_next_line(int fd, char **line)
 	if (!(s.p = malloc(sizeof(*s.p))))
 		return (-1);
 	*s.p = '\0';
-	*line = NULL;
+	*ln = NULL;
 	while (0 < b.n || 0 < (b.n = read(f, b.dat, BUFFER_SIZE)))
 	{
 		i = 0;
 		while(i < b.n && b.p[i] != '\n')
 			i++;
-		if (!(*line = malloc(s.n + i + 1)))
+		if (!(*ln = malloc(s.n + i + 1)))
 		{
 			free(s.p);
 			return (-1);
@@ -57,11 +55,11 @@ int get_next_line(int fd, char **line)
 		j = 0;
 		while (j < s.n)
 		{
-			(*line)[j] = s.p[j];
+			(*ln)[j] = s.p[j];
 			j++;
 		}
 		free(s.p);
-		s.p = *line;
+		s.p = *ln;
 		j = -1;
 		while (++j < (size_t)i)
 			s.p[s.n + j] = *(b.p++);
@@ -82,13 +80,13 @@ int get_next_line(int fd, char **line)
 		}
 	}
 	if (b.n == 0)
-		*line = s.p;
+		*ln = s.p;
 	if (b.n < 0)
 	{
 		b.p = b.dat;
 		b.n = 0;
-		free(*line);
-		*line = NULL;
+		free(*ln);
+		*ln = NULL;
 	}
     return (b.n);
 }
