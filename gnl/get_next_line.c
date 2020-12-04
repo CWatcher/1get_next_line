@@ -6,7 +6,7 @@
 /*   By: CWatcher <cwatcher@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/03 23:46:20 by CWatcher          #+#    #+#             */
-/*   Updated: 2020/12/04 20:28:21 by CWatcher         ###   ########.fr       */
+/*   Updated: 2020/12/04 20:46:40 by CWatcher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,7 @@ int	get_next_line(int fd, char **ln)
 	size_t			j;
 
 	if (fd < 0 || !ln)
-	{
-		b.p = b.dat;
-		b.n = 0;
 		return (-1);
-	}
 	if (f != fd)
 	{
 		b.p = b.dat;
