@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <fcntl.h>
 #include <unistd.h>
+#include <limits.h>
 #include "gnl/get_next_line.h"
 
 void test_gnl(int fd) {
@@ -12,7 +13,7 @@ void test_gnl(int fd) {
 	 	r = get_next_line(fd, &s);
 	    printf("%d|%s$\n", r, s);
     	free(s);
-	} while(r);
+	} while(r > 0);
 //	printf ("close == %d\n", close(fd));
 }
 int main(int ac, char *av[]) {
@@ -20,11 +21,14 @@ int main(int ac, char *av[]) {
 	int	i = 0;
 	if (ac == 1)
 		test_gnl(fd);
-	else while (++i < ac) {
-		fd = open(av[i], O_RDONLY);
-		printf("%s\n", av[i]);
-		test_gnl(fd);
-		printf("----------------------\n");
+	else if (ac > 1) {
+		test_gnl(INT_MAX);
+		while (++i < ac) {
+			fd = open(av[i], O_RDONLY);        	
+		    printf("%s\n", av[i]);
+		    test_gnl(fd);
+		    printf("----------------------\n");
+		}
 	}
     return (0);
 }
