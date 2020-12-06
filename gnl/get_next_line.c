@@ -37,37 +37,25 @@ int	get_next_line(int fd, char **ln)
 		i = 0;
 		while (i < b.n && b.p[i] != '\n')
 			i++;
-		if (!(*ln = malloc(s.n + i + 1)))
-		{
-			free(s.p);
+		if (!(s.p = malloc(s.n + i + 1)))
 			return (-1);
-		}
-		j = 0;
-		while (j < s.n)
-		{
-			(*ln)[j] = s.p[j];
-			j++;
-		}
-		free(s.p);
-		s.p = *ln;
 		j = -1;
-		while (++j < (size_t)i)
+		while (++j < s.n)
+			s.p[j] = (*ln)[j];
+		free(*ln);
+		*ln = s.p;
+		j = -1;
+		while (++j <= (size_t)i)
 			s.p[s.n + j] = *(b.p++);
 		s.n += i;
 		s.p[s.n] = '\0';
-		if (i < b.n)
+		if (b.n -= i)
 		{
-			if ((b.n -= i + 1))
-				b.p++;
-			else
+			if (--b.n == 0)
 				b.p = b.dat;
 			return (1);
 		}
-		else
-		{
-			b.p = b.dat;
-			b.n = 0;
-		}
+		b.p = b.dat;
 	}
 	if (*ln || b.n)
 		return (b.n);

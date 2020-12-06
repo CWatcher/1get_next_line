@@ -6,7 +6,7 @@
 /*   By: CWatcher <cwatcher@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 01:19:41 by CWatcher          #+#    #+#             */
-/*   Updated: 2020/12/04 13:06:42 by CWatcher         ###   ########.fr       */
+/*   Updated: 2020/12/06 10:19:50 by CWatcher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int				get_next_line(int fd, char **ln);
 
 typedef	struct	s_buffer
 {
-	char		dat[BUFFER_SIZE];
+	char		dat[BUFFER_SIZE + 1];
 	char		*p;
 	ssize_t		n;
 }				t_buffer;
