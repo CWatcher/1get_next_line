@@ -1,8 +1,12 @@
-_Store
-.bak
-aa
-*.o
 *.a
+*.bak
+*.dSYM
+*.o
+*.out
 *.so
+*.swp
+.DS_Store
 .idea
 cmake-build-debug
+aa
+tst*
