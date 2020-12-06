@@ -6,7 +6,7 @@
 /*   By: CWatcher <cwatcher@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/03 23:46:20 by CWatcher          #+#    #+#             */
-/*   Updated: 2020/12/07 01:24:15 by CWatcher         ###   ########.fr       */
+/*   Updated: 2020/12/07 02:36:28 by CWatcher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,8 @@ int	get_next_line(int fd, char **ln)
 		free(*ln);
 		*ln = s.p;
 		b.n++;
-		while (--b.n && *b.p != '\n')
-			s.p[s.n++] = *b.p++;
-		b.p++;
+		while (--b.n && *b.p++ != '\n')
+			s.p[s.n++] = *(b.p - 1);
 		s.p[s.n] = '\0';
 		if ((b.n) <= 1)
 			b.p = b.dat;
