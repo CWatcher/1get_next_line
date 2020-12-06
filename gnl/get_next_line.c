@@ -6,7 +6,7 @@
 /*   By: CWatcher <cwatcher@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/03 23:46:20 by CWatcher          #+#    #+#             */
-/*   Updated: 2020/12/06 21:30:49 by CWatcher         ###   ########.fr       */
+/*   Updated: 2020/12/06 23:37:48 by CWatcher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,28 +34,23 @@ int	get_next_line(int fd, char **ln)
 	*ln = NULL;
 	while (0 < b.n || 0 < (b.n = read(f, b.dat, BUFFER_SIZE)))
 	{
-		i = 0;
-		while (i < b.n && b.p[i] != '\n')
-			i++;
-		if (!(s.p = malloc(s.n + i + 1)))
+		if (!(s.p = malloc(s.n + b.n + 1)))
 			return (-1);
 		j = -1;
 		while (++j < s.n)
 			s.p[j] = (*ln)[j];
 		free(*ln);
 		*ln = s.p;
-		j = -1;
-		while (++j <= (size_t)i)
-			s.p[s.n + j] = *(b.p++);
+		i = 0;
+		while (i < b.n && *b.p != '\n')
+			s.p[s.n + i++] = *b.p++;
+		b.p++;
 		s.n += i;
 		s.p[s.n] = '\0';
-		if (b.n -= i)
-		{
-			if (--b.n == 0)
-				b.p = b.dat;
+		if ((b.n -= i) <= 1)
+			b.p = b.dat;
+		if (b.n && (--b.n || (b.p = b.dat)))
 			return (1);
-		}
-		b.p = b.dat;
 	}
 	if (*ln || b.n)
 		return (b.n);
