@@ -6,7 +6,7 @@
 /*   By: CWatcher <cwatcher@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/03 23:46:20 by CWatcher          #+#    #+#             */
-/*   Updated: 2020/12/07 00:11:46 by CWatcher         ###   ########.fr       */
+/*   Updated: 2020/12/07 01:24:15 by CWatcher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,12 @@ int	get_next_line(int fd, char **ln)
 			s.p[j] = (*ln)[j];
 		free(*ln);
 		*ln = s.p;
-		j = 0;
-		while (j < (size_t)b.n && *b.p != '\n')
-			s.p[s.n + j++] = *b.p++;
+		b.n++;
+		while (--b.n && *b.p != '\n')
+			s.p[s.n++] = *b.p++;
 		b.p++;
-		s.n += j;
 		s.p[s.n] = '\0';
-		if ((b.n -= j) <= 1)
+		if ((b.n) <= 1)
 			b.p = b.dat;
 		if (b.n && (--b.n || (b.p = b.dat)))
 			return (1);
