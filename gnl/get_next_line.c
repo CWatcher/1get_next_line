@@ -31,9 +31,6 @@ int	get_next_line(int fd, char **ln)
 		f = fd;
 	}
 	s.n = 0;
-	if (!(s.p = malloc(sizeof(*s.p))))
-		return (-1);
-	*s.p = '\0';
 	*ln = NULL;
 	while (0 < b.n || 0 < (b.n = read(f, b.dat, BUFFER_SIZE)))
 	{
@@ -72,7 +69,9 @@ int	get_next_line(int fd, char **ln)
 			b.n = 0;
 		}
 	}
-	if (b.n == 0)
-		*ln = s.p;
-	return (b.n);
+	if (*ln || b.n)
+		return (b.n);
+	if ((*ln = malloc(sizeof(**ln))))
+		**ln = '\0';
+	return (*ln ? 0 : -1);
 }
