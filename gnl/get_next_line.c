@@ -6,7 +6,7 @@
 /*   By: CWatcher <cwatcher@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/03 23:46:20 by CWatcher          #+#    #+#             */
-/*   Updated: 2020/12/06 23:37:48 by CWatcher         ###   ########.fr       */
+/*   Updated: 2020/12/07 00:11:46 by CWatcher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int	get_next_line(int fd, char **ln)
 	static int		f = -2;
 	static t_buffer b;
 	static t_str	s;
-	ssize_t			i;
 	size_t			j;
 
 	if (!ln)
@@ -41,13 +40,13 @@ int	get_next_line(int fd, char **ln)
 			s.p[j] = (*ln)[j];
 		free(*ln);
 		*ln = s.p;
-		i = 0;
-		while (i < b.n && *b.p != '\n')
-			s.p[s.n + i++] = *b.p++;
+		j = 0;
+		while (j < (size_t)b.n && *b.p != '\n')
+			s.p[s.n + j++] = *b.p++;
 		b.p++;
-		s.n += i;
+		s.n += j;
 		s.p[s.n] = '\0';
-		if ((b.n -= i) <= 1)
+		if ((b.n -= j) <= 1)
 			b.p = b.dat;
 		if (b.n && (--b.n || (b.p = b.dat)))
 			return (1);
