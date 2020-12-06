@@ -6,7 +6,7 @@
 /*   By: CWatcher <cwatcher@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/03 23:46:20 by CWatcher          #+#    #+#             */
-/*   Updated: 2020/12/04 20:46:40 by CWatcher         ###   ########.fr       */
+/*   Updated: 2020/12/06 21:30:49 by CWatcher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	get_next_line(int fd, char **ln)
 	ssize_t			i;
 	size_t			j;
 
-	if (fd < 0 || !ln)
+	if (!ln)
 		return (-1);
 	if (f != fd)
 	{
