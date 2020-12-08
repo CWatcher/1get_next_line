@@ -6,7 +6,7 @@
 /*   By: CWatcher <cwatcher@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/03 23:46:20 by CWatcher          #+#    #+#             */
-/*   Updated: 2020/12/08 14:43:15 by CWatcher         ###   ########.fr       */
+/*   Updated: 2020/12/09 00:37:36 by CWatcher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	get_next_line(int fd, char **ln)
 			s.p[s.n++] = *(b.p - 1);
 		s.p[s.n] = '\0';
 		b.p = b.n > 1 ? b.p : b.dat;
-		if (b.n && (--b.n || (b.p = b.dat)))
+		if (b.n && b.n--)
 			return (1);
 	}
 	if (!*ln && !b.n && (*ln = *ln || b.n ? *ln : malloc(sizeof(**ln))))
