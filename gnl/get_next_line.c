@@ -6,7 +6,7 @@
 /*   By: CWatcher <cwatcher@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/03 23:46:20 by CWatcher          #+#    #+#             */
-/*   Updated: 2020/12/10 04:08:34 by CWatcher         ###   ########.fr       */
+/*   Updated: 2020/12/10 04:13:29 by CWatcher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ int	get_next_line(int fd, char **ln)
 		while (b[fd].n && b[fd].dat[b[fd].i++] != '\n' && b[fd].n--)
 			s.p[s.n++] = b[fd].dat[b[fd].i - 1];
 		s.p[s.n] = '\0';
-		b[fd].i = b[fd].n == 1 ? 0 : b[fd].i;
+		b[fd].i *= b[fd].n != 1;
 		if (b[fd].n || !b[fd].i)
-			return (b[fd].n ? b[fd].n-- > 0 : 0); //TODO (b[fd].n-- > 0)
+			return (b[fd].n-- > 0);
 		b[fd].i = 0;
 	}
-	return (*ln ? b[fd].n : -1); //TODO? (-1)
+	return (-1);
 }
