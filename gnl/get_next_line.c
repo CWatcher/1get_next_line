@@ -6,7 +6,7 @@
 /*   By: CWatcher <cwatcher@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/03 23:46:20 by CWatcher          #+#    #+#             */
-/*   Updated: 2020/12/10 03:38:57 by CWatcher         ###   ########.fr       */
+/*   Updated: 2020/12/10 04:08:34 by CWatcher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,12 @@
 int	get_next_line(int fd, char **ln)
 {
 	static t_buffer	b[FD_MAX + 1];
-	static t_str	s;
+	t_str			s;
 	size_t			j;
 
-	if (!ln)
+	if (!ln || (*ln = NULL) || fd < 0 || fd > FD_MAX)
 		return (-1);
-	if (fd < 0 || fd > FD_MAX)
-	{
-		*ln = NULL;
-		return (-1);
-	}
 	s.n = 0;
-	*ln = NULL;
 	while (0 < b[fd].n || 0 <= (b[fd].n = read(fd, b[fd].dat, BUFFER_SIZE)))
 	{
 		if (!(s.p = malloc(s.n + b[fd].n + 1)))
