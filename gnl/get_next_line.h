@@ -6,7 +6,7 @@
 /*   By: CWatcher <cwatcher@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/04 01:19:41 by CWatcher          #+#    #+#             */
-/*   Updated: 2020/12/10 00:33:08 by CWatcher         ###   ########.fr       */
+/*   Updated: 2020/12/17 14:46:40 by cwatcher         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <sys/types.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1
+#  define BUFFER_SIZE 32767
 # endif
 
 # ifndef FD_MAX
